@@ -11,3 +11,13 @@ export type Space = {
   internalId: string;
   title: string;
 };
+
+export type Tab = {
+  index?: number;
+  internalId: string;
+  title: string;
+  url: string;
+  isLoading: boolean;
+  location: "pinned" | "unpinned" | "topApp";
+  spaceIndex?: number;
+};

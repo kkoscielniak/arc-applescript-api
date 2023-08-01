@@ -1,9 +1,8 @@
-import "@jxa/global-type";
 import { run as runJxa } from "@jxa/run";
-import type { Space } from "./types";
+import type { Space } from "../types";
 
 export const getSpaces = async (): Promise<Space[]> => {
-  const result = await runJxa(() => {
+  const result = await runJxa<Space[]>(() => {
     const spaces: Space[] = [];
 
     const arcApp = Application("Arc");
@@ -25,5 +24,5 @@ export const getSpaces = async (): Promise<Space[]> => {
     return spaces;
   });
 
-  return result as Space[];
+  return result;
 };
