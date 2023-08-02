@@ -9,6 +9,7 @@ export type Arc = {
 export type Space = {
   id: string;
   title: string;
+  index: number;
 };
 
 export type Tab = {
