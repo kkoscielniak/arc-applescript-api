@@ -7,17 +7,15 @@ export type Arc = {
 };
 
 export type Space = {
-  index: number;
-  internalId: string;
+  id: string;
   title: string;
 };
 
 export type Tab = {
-  index?: number;
-  internalId: string;
+  id: string;
   title: string;
   url: string;
   isLoading: boolean;
   location: "pinned" | "unpinned" | "topApp";
-  spaceIndex?: number;
+  spaceId: string;
 };

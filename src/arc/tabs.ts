@@ -2,8 +2,8 @@ import { run as runJxa } from "@jxa/run";
 import type { Tab } from "../types";
 
 /**
- * Gets an array of all the tabs in the front window
- * @returns Array of tabs in the front window
+ * Gets an array of all the Tabs in the front window
+ * @returns Array of Tabs in the front window
  */
 export const getTabs = async (): Promise<Tab[]> => {
   const result = await runJxa<Tab[]>(() => {
@@ -13,17 +13,23 @@ export const getTabs = async (): Promise<Tab[]> => {
 
     const { windows } = arcApp;
     const frontWindow = windows[0];
-    const tabsRef = frontWindow.tabs;
 
-    tabsRef().forEach((_: any, index: number) => {
-      const { title, id, url, loading, location } = tabsRef[index];
+    const { spaces: spacesRef } = frontWindow;
 
-      tabs.push({
-        title: title(),
-        internalId: id(),
-        url: url(),
-        isLoading: loading(),
-        location: location(),
+    spacesRef().forEach((_: any, index: number) => {
+      const { id: spaceId, tabs: tabsRef } = spacesRef[index];
+
+      tabsRef().forEach((_: any, index: number) => {
+        const { title, id, url, loading, location } = tabsRef[index];
+
+        tabs.push({
+          title: title(),
+          id: id(),
+          url: url(),
+          isLoading: loading(),
+          location: location(),
+          spaceId: spaceId(),
+        });
       });
     });
 
@@ -35,8 +41,8 @@ export const getTabs = async (): Promise<Tab[]> => {
 
 /**
  * Opens new Tab in the currently selected space of the front window
- * @param url URL to open in a new tab
- * @returns id of the newly opened tab
+ * @param url URL to open in a new Tab
+ * @returns id of the newly opened Tab
  */
 export const openTab = async (url: string): Promise<string> => {
   /* 
@@ -60,8 +66,8 @@ export const openTab = async (url: string): Promise<string> => {
 };
 
 /**
- * Closes a tab in the front window
- * @param tabId ID of the tab to close
+ * Closes a Tab in the front window
+ * @param tabId ID of the Tab to close
  */
 export const closeTab = async (tabId: string): Promise<void> =>
   await runJxa(

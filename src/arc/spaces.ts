@@ -2,8 +2,8 @@ import { run as runJxa } from "@jxa/run";
 import type { Space } from "../types";
 
 /**
- * Gets an array of the spaces in the front window
- * @returns Array of spaces in the front window
+ * Gets an array of the Spaces in the front window
+ * @returns Array of Spaces in the front window
  */
 export const getSpaces = async (): Promise<Space[]> => {
   const result = await runJxa<Space[]>(() => {
@@ -19,9 +19,8 @@ export const getSpaces = async (): Promise<Space[]> => {
       const { title, id } = spacesRef[index];
 
       spaces.push({
+        id: id(),
         title: title(),
-        internalId: id(),
-        index: index + 1, // Spaces are 1-indexed
       });
     });
 
