@@ -1,6 +1,10 @@
 import { run as runJxa } from "@jxa/run";
 import type { Space } from "../types";
 
+/**
+ * Gets an array of the spaces in the front window
+ * @returns Array of spaces in the front window
+ */
 export const getSpaces = async (): Promise<Space[]> => {
   const result = await runJxa<Space[]>(() => {
     const spaces: Space[] = [];

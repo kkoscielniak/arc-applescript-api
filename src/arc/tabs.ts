@@ -1,6 +1,10 @@
 import { run as runJxa } from "@jxa/run";
 import type { Tab } from "../types";
 
+/**
+ * Gets an array of all the tabs in the front window
+ * @returns Array of tabs in the front window
+ */
 export const getTabs = async (): Promise<Tab[]> => {
   const result = await runJxa<Tab[]>(() => {
     const tabs: Tab[] = [];
@@ -30,7 +34,7 @@ export const getTabs = async (): Promise<Tab[]> => {
 };
 
 /**
- * Opens new Tab in the currently selected space
+ * Opens new Tab in the currently selected space of the front window
  * @param url URL to open in a new tab
  * @returns id of the newly opened tab
  */
@@ -55,9 +59,12 @@ export const openTab = async (url: string): Promise<string> => {
   return result.split(" ")[2]; // Returns the tab ID
 };
 
-// TODO: Types
-export const closeTab = async (tabId: string): Promise<any> => {
-  const result = await runJxa(
+/**
+ * Closes a tab in the front window
+ * @param tabId ID of the tab to close
+ */
+export const closeTab = async (tabId: string): Promise<void> =>
+  await runJxa(
     (tabId) => {
       const arcApp = Application("Arc");
       const frontWindow = arcApp.windows[0];
@@ -78,6 +85,3 @@ export const closeTab = async (tabId: string): Promise<any> => {
     },
     [tabId]
   );
-
-  return result;
-};
