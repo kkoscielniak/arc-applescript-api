@@ -75,7 +75,7 @@ export const openTab = async (url: string): Promise<string> => {
 export const openTabInSpace = async (
   url: string,
   spaceId: string
-): Promise<any> => {
+): Promise<string> => {
   /* 
     Using AppleScript instead of JXA because JXA doesn't support `make new tab`
     (using JXA results in opening a Little Arc window instead of a tab)
