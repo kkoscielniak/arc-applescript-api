@@ -28,6 +28,7 @@
   "dependencies": {
     "@jxa/global-type": "^1.3.6",
     "@jxa/run": "^1.3.6",
-    "@jxa/types": "^1.3.6"
+    "@jxa/types": "^1.3.6",
+    "run-applescript": "^6.1.0"
   }
 }

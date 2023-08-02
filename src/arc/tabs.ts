@@ -29,29 +29,31 @@ export const getTabs = async (): Promise<Tab[]> => {
   return result;
 };
 
-export const openTab = async (url: string): Promise<void> =>
-  await runJxa<void>(
-    (url) => {
-      let createdTab: Tab | null = null;
+/**
+ * Opens new Tab in the currently selected space
+ * @param url URL to open in a new tab
+ * @returns id of the newly opened tab
+ */
+export const openTab = async (url: string): Promise<string> => {
+  /* 
+    Using AppleScript instead of JXA because JXA doesn't support `make new tab`
+    (using JXA results in opening a Little Arc window instead of a tab)
+  */
 
-      const arcApp = Application("Arc");
+  const runAppleScript = await import("run-applescript").then((module) => {
+    return module.runAppleScript;
+  });
 
-      const { windows } = arcApp;
-      const frontWindow = windows[0];
-      const { tabs: tabsRef } = frontWindow;
+  const result = await runAppleScript(`
+    tell application "Arc"
+      tell front window
+          make new tab with properties { URL: "${url}" }
+      end tell
+    end tell
+  `);
 
-      const tab = arcApp.Tab({ url });
-      tabsRef.push(tab);
-
-      /**
-       * TODO: Determine a way to return the newly created tab object
-       */
-      /**
-       * TODO: Try AppleScript instead JXA
-       */
-    },
-    [url]
-  );
+  return result.split(" ")[2]; // Returns the tab ID
+};
 
 // TODO: Types
 export const closeTab = async (tabId: string): Promise<any> => {
