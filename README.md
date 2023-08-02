@@ -108,6 +108,21 @@ Returns the result of the JavaScript call
 | -------- | ------ | ------------------------------- |
 | `code`   | string | **Stringified** JavaScript code |
 
+Example:
+
+```js
+const result = await executeJs(`
+  var video = document.querySelector("video");
+  
+  if (!video.paused){
+    video.pause();
+  }
+
+  return 'ok';
+`);
+console.log(result);
+```
+
 ## Contributing
 
 This project is a side effect of my [experiments](https://koscielniak.pro/experiments/experiments.html) with automating the Arc Browser. Its feature-set is limited as of now. I am gradually adding the features whenever I need them.
