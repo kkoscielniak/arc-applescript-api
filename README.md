@@ -96,6 +96,18 @@ Closes a Tab identified by the given `tabId`.
 | -------- | ------ | --------------------------- |
 | `tabId`  | string | The ID of the tab to close. |
 
+### Utils
+
+#### `exetuteJs(code: string): Promise<string>`
+
+Executes JavaScript code in the context of the current tab.
+
+Returns the result of the JavaScript call
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| `code`   | string | **Stringified** JavaScript code |
+
 ## Contributing
 
 This project is a side effect of my [experiments](https://koscielniak.pro/experiments/experiments.html) with automating the Arc Browser. Its feature-set is limited as of now. I am gradually adding the features whenever I need them.
