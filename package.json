@@ -17,7 +17,6 @@
     "arc"
   ],
   "author": "Krystian Kościelniak <krystiankoscielniak@gmail.com>",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/kkoscielniak/arc-applescript-api/issues"
   },
